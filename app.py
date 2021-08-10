@@ -22,6 +22,12 @@ def predict():
 
     return render_template('indexe.html', prediction_text='PROBABILITY THAT YOUR LOAN WILL GET APPROVED IS ; {}'.format(output))
 
+app.route('/results',methods=['POST'])
+def results(): 
+
+data = request.get_json(force=True) 
+prediction = model.predict([np.array(list(data.values()))]) 
+output = prediction[0] return jsonify(output)
 
 
 if __name__ == "__main__":
